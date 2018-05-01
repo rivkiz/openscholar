@@ -103,7 +103,14 @@ if (!class_exists('purl_vsite_domain')) {
       $options['absolute'] = TRUE;
       if (!_purl_skip($element, $options)) {
         $path = $this->remove_scholar_purl($path, $options);
-        $options['base_url'] = "http://{$element->value}";
+        // PATCHED by HUJI:
+        // We should use the right protocol when building the URL.
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
+          $options['base_url'] = "https://{$element->value}";
+        }
+        else{
+          $options['base_url'] = "http://{$element->value}";
+        }
       }
       elseif (!isset($options['base_url'])) {
         //If purl_skip was triggered and no base_url has been set manually then set as purl_base_domain
