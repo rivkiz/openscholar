@@ -1,0 +1,14 @@
+diff --git a/profiles/openscholar/modules/vsite/modules/vsite_domain/plugins/purl_vsite_domain.inc b/profiles/openscholar/modules/vsite/modules/vsite_domain/plugins/purl_vsite_domain.inc
+index c2e2bc8..ef29063 100755
+--- a/profiles/openscholar/modules/vsite/modules/vsite_domain/plugins/purl_vsite_domain.inc
++++ b/profiles/openscholar/modules/vsite/modules/vsite_domain/plugins/purl_vsite_domain.inc
+@@ -103,7 +103,8 @@ if (!class_exists('purl_vsite_domain')) {
+       $options['absolute'] = TRUE;
+       if (!_purl_skip($element, $options)) {
+         $path = $this->remove_scholar_purl($path, $options);
+-        // Patched by huji to fix the url that have 'http' from this function.
++        // PATCHED by HUJI:
++        // We should use the right protocol when building the URL.
+         if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
+           $options['base_url'] = "https://{$element->value}";
+         }
